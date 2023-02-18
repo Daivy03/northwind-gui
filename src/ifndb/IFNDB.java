@@ -109,10 +109,8 @@ public class IFNDB {
         // Chiude la connessione al database
         con.close();
     }
-    
-    
 
-    public static void visualizzaCliente(String st, String FAsc, JTable table,Boolean c)
+    public static void visualizzaCliente(String st, String FAsc, JTable table, Boolean c)
             throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
@@ -126,13 +124,12 @@ public class IFNDB {
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "ORDER BY customers.CustomerID ASC";
             rs = stmt.executeQuery(quer);
-        } else if(c==true){
+        } else if (c == true) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
-                    "WHERE customers.CustomerID LIKE \""+st+"\"";
+                    "WHERE customers.CustomerID LIKE \"" + st + "\"";
             rs = stmt.executeQuery(quer);
-        }
-        else {
+        } else {
             quer = "SELECT * FROM orders\n" +
                     "ORDER BY orders." + FAsc + " ASC";
             rs = stmt.executeQuery(quer);
@@ -173,12 +170,10 @@ public class IFNDB {
         }
 
         table.setModel(tableModel);
-        
+
         TableColumn checkBoxColumn = table.getColumnModel().getColumn(0); // Ottieni la colonna dei checkbox
         checkBoxColumn.setCellRenderer(new CheckBoxRenderer()); // Imposta il renderizzatore di celle
         checkBoxColumn.setCellEditor(new CheckBoxEditor()); // Imposta l'editor di celle
-        
-        
 
         for (int i = 0; i < table.getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(i);
@@ -215,24 +210,20 @@ public class IFNDB {
         return clienti;
     }
 
-    public static void cancellaOrdini(JTable table){
+    public static void cancellaOrdini(JTable table) {
         String OrderID = null;
         int rowtable;
         int columntable;
-        String query = "DELETE FROM orders where OrderID like "+OrderID;
-        
-        try{
+        String query = "DELETE FROM orders where OrderID like " + OrderID;
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
-        Statement stmt = con.createStatement();
-         //   stmt.executeUpdate(query);
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+            Statement stmt = con.createStatement();
+            // stmt.executeUpdate(query);
+        } catch (Exception e) {
+
         }
-        catch(Exception e){
-            
-        }
-        
-        
-        
 
     }
 
@@ -397,7 +388,7 @@ public class IFNDB {
         // FilterOrderCombo.getModel();
         // removing old data
         model.removeAllElements();
-       // JComboBox listcustomers = new JComboBox(clienti);
+        // JComboBox listcustomers = new JComboBox(clienti);
         for (String item : clienti) {
             model.addElement(item);
         }
@@ -429,7 +420,7 @@ public class IFNDB {
         String[] cols = colonne.toArray(new String[colonne.size()]);
         DefaultComboBoxModel model = (DefaultComboBoxModel) combo.getModel();
         model.removeAllElements();
-       // JComboBox list = new JComboBox(cols);
+        // JComboBox list = new JComboBox(cols);
         for (String item : cols) {
             model.addElement(item);
         }
@@ -437,7 +428,7 @@ public class IFNDB {
     }
 
     public static void main(String[] args) {
-        
+
     }
 
 }
