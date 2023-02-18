@@ -58,11 +58,19 @@ public class FrameOrdini extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         ClienteCheck = new javax.swing.JCheckBox();
         jLayeredClienti = new javax.swing.JLayeredPane();
+        IdCustomerCombo = new javax.swing.JComboBox<>();
+        FilterCombo2 = new javax.swing.JComboBox<>();
+        BTNVisualizza2 = new javax.swing.JButton();
+        BTNElimina2 = new javax.swing.JButton();
+        IdclienteLB2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table2 = new javax.swing.JTable();
+        ClienteCheck1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Northwind manager");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(958, 691));
 
         IdClienteCombo.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         IdClienteCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -196,22 +204,151 @@ public class FrameOrdini extends javax.swing.JFrame {
                     .addComponent(BTNVisualizza))
                 .addContainerGap())
             .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredOrdiniLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
         jTabbedPane1.addTab("Ordini", jLayeredOrdini);
 
+        IdCustomerCombo.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        IdCustomerCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IdCustomerCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IdCustomerComboMouseClicked(evt);
+            }
+        });
+        IdCustomerCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdCustomerComboActionPerformed(evt);
+            }
+        });
+
+        FilterCombo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Discendente" }));
+        FilterCombo2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FilterCombo2MouseClicked(evt);
+            }
+        });
+        FilterCombo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterCombo2ActionPerformed(evt);
+            }
+        });
+
+        BTNVisualizza2.setBackground(new java.awt.Color(0, 153, 255));
+        BTNVisualizza2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        BTNVisualizza2.setForeground(new java.awt.Color(255, 255, 255));
+        BTNVisualizza2.setText("Visualizza");
+        BTNVisualizza2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNVisualizza2ActionPerformed(evt);
+            }
+        });
+
+        BTNElimina2.setBackground(new java.awt.Color(204, 0, 0));
+        BTNElimina2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        BTNElimina2.setForeground(new java.awt.Color(255, 255, 255));
+        BTNElimina2.setText("Elimina");
+        BTNElimina2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNElimina2ActionPerformed(evt);
+            }
+        });
+
+        IdclienteLB2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        IdclienteLB2.setText("Ordina per:");
+
+        jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        table2.setAutoCreateRowSorter(true);
+        table2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "CustomerID", "CompanyName", "ContactName", "ContactTitle"
+            }
+        ));
+        table2.setEditingRow(-1);
+        table2.setMaximumSize(new java.awt.Dimension(2147483647, 90));
+        table2.setShowGrid(true);
+        jScrollPane2.setViewportView(table2);
+
+        ClienteCheck1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        ClienteCheck1.setText("Filtra Cliente:");
+        ClienteCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClienteCheck1ActionPerformed(evt);
+            }
+        });
+
+        jLayeredClienti.setLayer(IdCustomerCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(FilterCombo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(BTNVisualizza2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(BTNElimina2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(IdclienteLB2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(ClienteCheck1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jLayeredClientiLayout = new javax.swing.GroupLayout(jLayeredClienti);
         jLayeredClienti.setLayout(jLayeredClientiLayout);
         jLayeredClientiLayout.setHorizontalGroup(
             jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1022, Short.MAX_VALUE)
+            .addGroup(jLayeredClientiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FilterCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ClienteCheck1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IdCustomerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IdclienteLB2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredClientiLayout.createSequentialGroup()
+                        .addComponent(BTNElimina2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNVisualizza2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredClientiLayout.createSequentialGroup()
+                    .addContainerGap(173, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(846, Short.MAX_VALUE)))
         );
         jLayeredClientiLayout.setVerticalGroup(
             jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 671, Short.MAX_VALUE)
+            .addGroup(jLayeredClientiLayout.createSequentialGroup()
+                .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredClientiLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(IdclienteLB2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FilterCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ClienteCheck1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(IdCustomerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredClientiLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNVisualizza2)
+                    .addComponent(BTNElimina2))
+                .addContainerGap())
+            .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredClientiLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jTabbedPane1.addTab("Clienti", jLayeredClienti);
@@ -238,6 +375,34 @@ public class FrameOrdini extends javax.swing.JFrame {
     private void FilterComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterComboMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_FilterComboMouseClicked
+
+    private void IdCustomerComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IdCustomerComboMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdCustomerComboMouseClicked
+
+    private void IdCustomerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdCustomerComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdCustomerComboActionPerformed
+
+    private void FilterCombo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterCombo2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FilterCombo2MouseClicked
+
+    private void FilterCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterCombo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FilterCombo2ActionPerformed
+
+    private void BTNVisualizza2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNVisualizza2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNVisualizza2ActionPerformed
+
+    private void BTNElimina2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNElimina2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNElimina2ActionPerformed
+
+    private void ClienteCheck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteCheck1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClienteCheck1ActionPerformed
 
     private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNEliminaActionPerformed
         // TODO add your handling code here:
@@ -268,7 +433,6 @@ public class FrameOrdini extends javax.swing.JFrame {
 
     private void BTNVisualizzaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNVisualizzaActionPerformed
         // TODO add your handling code here:
-
         try {
             String t = (String) FilterCombo.getSelectedItem();
             IFNDB.showOrders((String) IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
@@ -341,16 +505,25 @@ public class FrameOrdini extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNElimina;
+    private javax.swing.JButton BTNElimina2;
     public javax.swing.JButton BTNVisualizza;
+    public javax.swing.JButton BTNVisualizza2;
     private javax.swing.JCheckBox ClienteCheck;
+    private javax.swing.JCheckBox ClienteCheck1;
     private javax.swing.JComboBox<String> FilterCombo;
+    private javax.swing.JComboBox<String> FilterCombo2;
     private javax.swing.JComboBox<String> IdClienteCombo;
+    private javax.swing.JComboBox<String> IdCustomerCombo;
     private javax.swing.JLabel IdclienteLB1;
+    private javax.swing.JLabel IdclienteLB2;
     private javax.swing.JLayeredPane jLayeredClienti;
     private javax.swing.JLayeredPane jLayeredOrdini;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable table;
+    private javax.swing.JTable table2;
     // End of variables declaration//GEN-END:variables
 }
