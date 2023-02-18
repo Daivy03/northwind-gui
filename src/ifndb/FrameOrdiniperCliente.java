@@ -78,6 +78,11 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
         });
 
         FilterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Discendente" }));
+        FilterCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FilterComboMouseClicked(evt);
+            }
+        });
         FilterCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FilterComboActionPerformed(evt);
@@ -182,6 +187,11 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FilterComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterComboMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_FilterComboMouseClicked
 
     private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNEliminaActionPerformed
         // TODO add your handling code here:

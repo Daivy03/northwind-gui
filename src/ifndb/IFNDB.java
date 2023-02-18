@@ -110,6 +110,9 @@ public class IFNDB {
         // Chiude la connessione al database
         con.close();
     }
+    public void showFilterOrders(){
+        
+    }
 
     public static void showOrders(String clientId, String filterBy, JTable table, Boolean c)
             throws ClassNotFoundException, SQLException {
@@ -128,7 +131,8 @@ public class IFNDB {
         } else if (c == true) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
-                    "WHERE customers.CustomerID LIKE \"" + clientId + "\"";
+                    "WHERE customers.CustomerID LIKE \"" + clientId + "\""+
+                    "ORDER BY orders."+ filterBy + " ASC";
             rs = stmt.executeQuery(quer);
         } else {
             quer = "SELECT * FROM orders\n" +
