@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -157,22 +158,58 @@ public class IFNDB {
 
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Elimina"); // Aggiungi la colonna dei checkbox
+
         int columnCount = rs.getMetaData().getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             tableModel.addColumn(rs.getMetaData().getColumnName(i));
         }
+
         while (rs.next()) {
-            Object[] row = new Object[columnCount];
+            Object[] row = new Object[columnCount + 1]; // +1 per la nuova colonna dei checkbox
+            row[0] = false; // Imposta il valore di default della colonna dei checkbox
             for (int i = 1; i <= columnCount; i++) {
-                row[i - 1] = rs.getObject(i);
+                row[i] = rs.getObject(i);
             }
             tableModel.addRow(row);
+        }
+
+        class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
+            public CheckBoxRenderer() {
+                setHorizontalAlignment(JCheckBox.CENTER);
+            }
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                    boolean hasFocus, int row, int column) {
+                setSelected((Boolean) value);
+                return this;
+            }
+        }
+
+        class CheckBoxEditor extends DefaultCellEditor {
+            public CheckBoxEditor() {
+                super(new JCheckBox());
+            }
+
+            @Override
+            public Object getCellEditorValue() {
+                return ((JCheckBox) editorComponent).isSelected();
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+                    int column) {
+                JCheckBox checkBox = (JCheckBox) editorComponent;
+                checkBox.setSelected((Boolean) value);
+                return checkBox;
+            }
         }
 
         table.setModel(tableModel);
 
         TableColumn checkBoxColumn = table.getColumnModel().getColumn(0); // Ottieni la colonna dei checkbox
-        checkBoxColumn.setCellRenderer(new CheckBoxRenderer()); // Imposta il renderizzatore di celle
+        checkBoxColumn.setCellRenderer((TableCellRenderer) new CheckBoxRenderer()); // Imposta il renderizzatore di
+                                                                                    // celle
         checkBoxColumn.setCellEditor(new CheckBoxEditor()); // Imposta l'editor di celle
 
         for (int i = 0; i < table.getColumnCount(); i++) {
@@ -194,6 +231,7 @@ public class IFNDB {
 
         // Chiude la connessione al database
         con.close();
+
     }
 
     public static ArrayList<String> recoverClienti() throws Exception {
