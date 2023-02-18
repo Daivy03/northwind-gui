@@ -111,7 +111,7 @@ public class IFNDB {
         con.close();
     }
 
-    public static void visualizzaCliente(String st, String FAsc, JTable table, Boolean c)
+    public static void showOrders(String clientId, String filterBy, JTable table, Boolean c)
             throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
@@ -120,7 +120,7 @@ public class IFNDB {
         ResultSet rs = null;
         String quer;
 
-        if (FAsc.equalsIgnoreCase("CustomerID") && c == false) {
+        if (filterBy.equalsIgnoreCase("CustomerID") && c == false) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "ORDER BY customers.CustomerID ASC";
@@ -128,11 +128,11 @@ public class IFNDB {
         } else if (c == true) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
-                    "WHERE customers.CustomerID LIKE \"" + st + "\"";
+                    "WHERE customers.CustomerID LIKE \"" + clientId + "\"";
             rs = stmt.executeQuery(quer);
         } else {
             quer = "SELECT * FROM orders\n" +
-                    "ORDER BY orders." + FAsc + " ASC";
+                    "ORDER BY orders." + filterBy + " ASC";
             rs = stmt.executeQuery(quer);
         }
 
@@ -157,62 +157,22 @@ public class IFNDB {
         // }
 
         DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Elimina"); // Aggiungi la colonna dei checkbox
-
         int columnCount = rs.getMetaData().getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             tableModel.addColumn(rs.getMetaData().getColumnName(i));
         }
 
         while (rs.next()) {
-            Object[] row = new Object[columnCount + 1]; // +1 per la nuova colonna dei checkbox
-            row[0] = false; // Imposta il valore di default della colonna dei checkbox
+            Object[] row = new Object[columnCount];
             for (int i = 1; i <= columnCount; i++) {
-                row[i] = rs.getObject(i);
+                row[i - 1] = rs.getObject(i);
             }
             tableModel.addRow(row);
         }
 
-        class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
-            public CheckBoxRenderer() {
-                setHorizontalAlignment(JCheckBox.CENTER);
-            }
-
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                    boolean hasFocus, int row, int column) {
-                setSelected((Boolean) value);
-                return this;
-            }
-        }
-
-        class CheckBoxEditor extends DefaultCellEditor {
-            public CheckBoxEditor() {
-                super(new JCheckBox());
-            }
-
-            @Override
-            public Object getCellEditorValue() {
-                return ((JCheckBox) editorComponent).isSelected();
-            }
-
-            @Override
-            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
-                    int column) {
-                JCheckBox checkBox = (JCheckBox) editorComponent;
-                checkBox.setSelected((Boolean) value);
-                return checkBox;
-            }
-        }
-
         table.setModel(tableModel);
 
-        TableColumn checkBoxColumn = table.getColumnModel().getColumn(0); // Ottieni la colonna dei checkbox
-        checkBoxColumn.setCellRenderer((TableCellRenderer) new CheckBoxRenderer()); // Imposta il renderizzatore di
-                                                                                    // celle
-        checkBoxColumn.setCellEditor(new CheckBoxEditor()); // Imposta l'editor di celle
-
-        for (int i = 0; i < table.getColumnCount(); i++) {
+        for (int i = 1; i < table.getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(i);
             column.setPreferredWidth(100);
         }
@@ -233,6 +193,63 @@ public class IFNDB {
         con.close();
 
     }
+    // metodo per selezionare righe con checkbox true
+    // public ArrayList<Object[]> getRigheSelezionate(DefaultTableModel tableModel)
+    // {
+    // ArrayList<Object[]> selectedRows = new ArrayList<>();
+    // for (int i = 0; i < tableModel.getRowCount(); i++) {
+    // Boolean isChecked = (Boolean) tableModel.getValueAt(i, 0);
+    // if (isChecked) {
+    // Object[] row = new Object[tableModel.getColumnCount()];
+    // for (int j = 0; j < tableModel.getColumnCount(); j++) {
+    // row[j] = tableModel.getValueAt(i, j);
+    // }
+    // selectedRows.add(row);
+    // }
+    // }
+    // return selectedRows;
+    // }
+
+    // metodo seleziona celle e dati contenuti
+    public static void deleteOrders(JTable table) {
+        // String query = "DELETE FROM orders where OrderID like " + OrderID;
+        int[] selectedRows = table.getSelectedRows();
+        int columnCount = table.getColumnCount();
+        ArrayList<String> ordersId = new ArrayList<>();
+
+        ArrayList<ArrayList<Object>> selectedCells = new ArrayList<>();
+        for (int i = 0; i < selectedRows.length; i++) {
+            ArrayList<Object> row = new ArrayList<>();
+            for (int j = 0; j < columnCount; j++) {
+                row.add(table.getValueAt(selectedRows[i], j));
+            }
+            selectedCells.add(row);
+        }
+
+        // Estrai i dati della prima colonna e aggiungili all'ArrayList ordersId
+        for (ArrayList<Object> row : selectedCells) {
+            ordersId.add(row.get(0).toString()); // 0 rappresenta l'indice della prima colonna
+        }
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+            Statement stmt = con.createStatement();
+            int rowsupdated=0;
+
+            // Esegui la query di eliminazione per ogni orderId presente in ordersId
+            for (String orderId : ordersId) {
+                String query = "DELETE FROM orders WHERE OrderID = " + orderId;
+                rowsupdated = stmt.executeUpdate(query);
+                if (rowsupdated>0) {
+            JOptionPane.showMessageDialog(null, "Ordine eliminato!");
+}
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
     public static ArrayList<String> recoverClienti() throws Exception {
         ArrayList<String> clienti = new ArrayList<>();
@@ -246,23 +263,6 @@ public class IFNDB {
             clienti.add(name);
         }
         return clienti;
-    }
-
-    public static void cancellaOrdini(JTable table) {
-        String OrderID = null;
-        int rowtable;
-        int columntable;
-        String query = "DELETE FROM orders where OrderID like " + OrderID;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
-            Statement stmt = con.createStatement();
-            // stmt.executeUpdate(query);
-        } catch (Exception e) {
-
-        }
-
     }
 
     public static ArrayList<String> recoverCompany() throws Exception {
@@ -398,7 +398,7 @@ public class IFNDB {
         con.close();
     }
 
-    public static ArrayList<String> recoverOrdini() throws Exception {
+    public static ArrayList<String> recoverOrders() throws Exception {
         ArrayList<String> ordini = new ArrayList<>();
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
@@ -451,7 +451,7 @@ public class IFNDB {
                 colonne.add(name);
             }
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, "Errore recupero ordini");
         }
         // imposto combobox con le colonne recuperate
 

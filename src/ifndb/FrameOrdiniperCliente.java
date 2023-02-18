@@ -45,6 +45,8 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -60,6 +62,7 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ricerca per cliente");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(958, 691));
 
         IdClienteCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -105,6 +108,7 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        table.setAutoCreateRowSorter(true);
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -116,6 +120,8 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
                 "OrderID", "CustomerID", "EmployeeID", "OrderDate"
             }
         ));
+        table.setEditingRow(-1);
+        table.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(table);
 
         ClienteCheck.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
@@ -139,15 +145,16 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
                         .addComponent(IdClienteCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(544, 544, 544)
+                        .addGap(578, 578, 578)
                         .addComponent(BTNElimina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BTNVisualizza))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -176,30 +183,23 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminaActionPerformed
+    private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNEliminaActionPerformed
         // TODO add your handling code here:
+        String t = (String) FilterCombo.getSelectedItem();
+        IFNDB.deleteOrders(table);
         try{
-            IFNDB.cancellaOrdini(table);
-            int rowtable;
-            int columntable;
-            if(table.getCellSelectionEnabled()){
-            table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            rowtable = table.getSelectedRow();
-            columntable = table.getSelectedColumn();
-            System.out.println(rowtable+" "+columntable);
-        }
+            IFNDB.showOrders((String)IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
         }catch(Exception e){
-            
+            JOptionPane.showMessageDialog(null,"Errore nella eliminazione");
         }
         
-    }//GEN-LAST:event_BTNEliminaActionPerformed
+
+    }// GEN-LAST:event_BTNEliminaActionPerformed
 
     private void BTNOrdinaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNOrdinaActionPerformed
-        // TODO add your handling code here:
+        //
         try {
-            String t = (String) IdClienteCombo.getSelectedItem();
             IFNDB.recoverFilterOrders(FilterCombo);
-            // IFNDB.visualizzaCliente(st, FAsc, table);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -215,10 +215,10 @@ public class FrameOrdiniperCliente extends javax.swing.JFrame {
 
         try {
             String t = (String) FilterCombo.getSelectedItem();
-            System.out.println("FAsc value:" + t);
-            IFNDB.visualizzaCliente((String) IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
-            System.out.println(ClienteCheck.isSelected());
-            System.out.println("FAsc value:" + t);
+             System.out.println("FilterBy value:" + t);
+            IFNDB.showOrders((String) IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
+             System.out.println(ClienteCheck.isSelected());
+             System.out.println("FilterBy value:" + t);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
         }
