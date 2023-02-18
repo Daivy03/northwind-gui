@@ -46,6 +46,8 @@ public class FrameOrdini extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jLayeredOrdini = new javax.swing.JLayeredPane();
         IdClienteCombo = new javax.swing.JComboBox<>();
         FilterCombo = new javax.swing.JComboBox<>();
         BTNVisualizza = new javax.swing.JButton();
@@ -55,9 +57,10 @@ public class FrameOrdini extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         ClienteCheck = new javax.swing.JCheckBox();
+        jLayeredClienti = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ordini");
+        setTitle("Northwind manager");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(958, 691));
 
@@ -138,41 +141,48 @@ public class FrameOrdini extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jLayeredOrdini.setLayer(IdClienteCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(FilterCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(BTNVisualizza, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(BTNElimina, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(IdclienteLB1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(ClienteCheck, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredOrdiniLayout = new javax.swing.GroupLayout(jLayeredOrdini);
+        jLayeredOrdini.setLayout(jLayeredOrdiniLayout);
+        jLayeredOrdiniLayout.setHorizontalGroup(
+            jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IdclienteLB1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IdclienteLB1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
                         .addComponent(BTNElimina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTNVisualizza))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
+                    .addGap(177, 177, 177)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(842, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jLayeredOrdiniLayout.setVerticalGroup(
+            jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNElimina)
-                    .addComponent(BTNVisualizza))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(0, 163, Short.MAX_VALUE))
+            .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(IdclienteLB1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +190,46 @@ public class FrameOrdini extends javax.swing.JFrame {
                 .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNElimina)
+                    .addComponent(BTNVisualizza))
+                .addContainerGap())
+            .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Ordini", jLayeredOrdini);
+
+        javax.swing.GroupLayout jLayeredClientiLayout = new javax.swing.GroupLayout(jLayeredClienti);
+        jLayeredClienti.setLayout(jLayeredClientiLayout);
+        jLayeredClientiLayout.setHorizontalGroup(
+            jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1022, Short.MAX_VALUE)
+        );
+        jLayeredClientiLayout.setVerticalGroup(
+            jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 671, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Clienti", jLayeredClienti);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -297,8 +346,11 @@ public class FrameOrdini extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> FilterCombo;
     private javax.swing.JComboBox<String> IdClienteCombo;
     private javax.swing.JLabel IdclienteLB1;
+    private javax.swing.JLayeredPane jLayeredClienti;
+    private javax.swing.JLayeredPane jLayeredOrdini;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

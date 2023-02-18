@@ -81,8 +81,6 @@ public class IFNDB {
 
         table.setEnabled(true);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-
         JScrollPane scrollPane = (JScrollPane) table.getParent().getParent();
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
