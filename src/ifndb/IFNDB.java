@@ -25,40 +25,49 @@ public class IFNDB {
     
     public static void showOrders(String clientId, String filterBy, JTable table, Boolean c){
         ResultSet rs = null;
-        try{
+    try {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
-        Statement stmt = con.createStatement();
-        
-        String quer;
-        //da nome cliente/compagnia a id
+
         String companyName = clientId;
-            String query = "SELECT CustomerID FROM customers WHERE CompanyName = ?";
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, companyName);
-            ResultSet resultSet = statement.executeQuery();
-            String customerID = null;
-            if (resultSet.next()) {
-                customerID = resultSet.getString("CustomerID");
-            }
-            
-        if (filterBy.equalsIgnoreCase("CustomerID") && c == false) {
+        String query = "SELECT CustomerID FROM customers WHERE CompanyName = ?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, companyName);
+        ResultSet resultSet = statement.executeQuery();
+        String customerID = null;
+        if (resultSet.next()) {
+            customerID = resultSet.getString("CustomerID");
+        }
+
+        String quer;
+        if (filterBy.equalsIgnoreCase("CustomerID") && !c) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "ORDER BY customers.CustomerID ASC";
-            rs = stmt.executeQuery(quer);
-        } else if (c == true) {
+        } else if (c) {
             quer = "SELECT * FROM orders\n" +
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
-                    "WHERE customers.CustomerID LIKE \"" + customerID + "\""+
+                    "WHERE customers.CustomerID = ? "+
                     "ORDER BY orders."+ filterBy + " ASC";
-            rs = stmt.executeQuery(quer);
         } else {
             quer = "SELECT * FROM orders\n" +
                     "ORDER BY orders." + filterBy + " ASC";
-            rs = stmt.executeQuery(quer);
         }
-        DefaultTableModel tableModel = new DefaultTableModel();
+
+        PreparedStatement stmt = con.prepareStatement(quer);
+        if (c) {
+            stmt.setString(1, customerID);
+        }
+        rs = stmt.executeQuery();
+
+        DefaultTableModel tableModel = new DefaultTableModel(){
+            //impedire la modifica (solo visibile) delle righe
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
         int columnCount = rs.getMetaData().getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             tableModel.addColumn(rs.getMetaData().getColumnName(i));
@@ -90,9 +99,10 @@ public class IFNDB {
 
         // Chiude la connessione al database
         con.close();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+    } catch(Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
+
     }
     public static void deleteOrders(JTable table) {
        
