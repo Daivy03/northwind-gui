@@ -4,6 +4,7 @@
  */
 package ifndb;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -25,7 +26,6 @@ public class FrameOrdini extends javax.swing.JFrame {
     
     public FrameOrdini() {
         initComponents();
-
         try {
             IFNDB.recoverFilterOrders(FilterCombo);
             IFNDB.recoverClientiCombo(IdClienteCombo);
@@ -57,7 +57,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         ClienteCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ricerca per cliente");
+        setTitle("Ordini");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(958, 691));
 
@@ -86,7 +86,9 @@ public class FrameOrdini extends javax.swing.JFrame {
             }
         });
 
+        BTNVisualizza.setBackground(new java.awt.Color(0, 153, 255));
         BTNVisualizza.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        BTNVisualizza.setForeground(new java.awt.Color(255, 255, 255));
         BTNVisualizza.setText("Visualizza");
         BTNVisualizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,8 +96,9 @@ public class FrameOrdini extends javax.swing.JFrame {
             }
         });
 
+        BTNElimina.setBackground(new java.awt.Color(204, 0, 0));
         BTNElimina.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        BTNElimina.setForeground(new java.awt.Color(204, 0, 0));
+        BTNElimina.setForeground(new java.awt.Color(255, 255, 255));
         BTNElimina.setText("Elimina");
         BTNElimina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +127,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         ));
         table.setEditingRow(-1);
         table.setMaximumSize(new java.awt.Dimension(2147483647, 90));
-        table.setShowGrid(false);
+        table.setShowGrid(true);
         jScrollPane1.setViewportView(table);
 
         ClienteCheck.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
@@ -140,14 +143,15 @@ public class FrameOrdini extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IdclienteLB1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTNElimina)
@@ -279,7 +283,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                FlatLightLaf.setup(); //look and feel setup
                 new FrameOrdini().setVisible(true);
 
             }
@@ -288,7 +292,7 @@ public class FrameOrdini extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNElimina;
-    private javax.swing.JButton BTNVisualizza;
+    public javax.swing.JButton BTNVisualizza;
     private javax.swing.JCheckBox ClienteCheck;
     private javax.swing.JComboBox<String> FilterCombo;
     private javax.swing.JComboBox<String> IdClienteCombo;
