@@ -411,7 +411,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         try{
             IFNDB.showOrders((String)IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Errore nella eliminazione");
+            JOptionPane.showMessageDialog(null,"eliminazione fallita!","Errore",JOptionPane.ERROR_MESSAGE);
         }
         
 
@@ -437,7 +437,7 @@ public class FrameOrdini extends javax.swing.JFrame {
             String t = (String) FilterCombo.getSelectedItem();
             IFNDB.showOrders((String) IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(null,(String)e.getMessage(),"",JOptionPane.WARNING_MESSAGE);
         }
 
     }// GEN-LAST:event_BTNVisualizzaActionPerformed

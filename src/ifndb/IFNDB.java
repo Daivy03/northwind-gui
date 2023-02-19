@@ -18,6 +18,8 @@ import javax.swing.table.TableCellRenderer;
  * @author Reale
  */
 public class IFNDB {
+    private static String user = "root";
+    private static String password = "";
 
     /**
      * @param args the command line arguments
@@ -27,7 +29,7 @@ public class IFNDB {
         ResultSet rs = null;
     try {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
 
         String companyName = clientId;
         String query = "SELECT CustomerID FROM customers WHERE CompanyName = ?";
@@ -126,7 +128,7 @@ public class IFNDB {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
             Statement stmt = con.createStatement();
             int rowsupdated=0;
 
@@ -147,7 +149,7 @@ public class IFNDB {
     public static ArrayList<String> recoverCompany() throws Exception {
         ArrayList<String> company = new ArrayList<>();
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
         Statement stmt = con.createStatement();
         String query = "SELECT CompanyName from customers";
         ResultSet rs = stmt.executeQuery(query);
@@ -163,7 +165,7 @@ public class IFNDB {
     public static ArrayList<String> recoverOrders() throws Exception {
         ArrayList<String> ordini = new ArrayList<>();
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
         Statement stmt = con.createStatement();
         String query = "SELECT OrderID from orders";
         ResultSet rs = stmt.executeQuery(query);
@@ -204,7 +206,7 @@ public class IFNDB {
         ArrayList<String> colonne = new ArrayList<>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", "davide", "davide");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -212,7 +214,9 @@ public class IFNDB {
                 colonne.add(name);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Errore recupero ordini");
+            JOptionPane.showMessageDialog(null, "recupero ordini fallito!","Errore",JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+            
         }
         // imposto combobox con le colonne recuperate
 
