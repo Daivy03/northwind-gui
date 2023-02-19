@@ -200,7 +200,6 @@ public class IFNDB {
             }
             selectedCells.add(row);
         }
-
         
         for (ArrayList<Object> row : selectedCells) {
             ordersId.add(row.get(0).toString());
@@ -218,6 +217,45 @@ public class IFNDB {
                 rowsupdated = stmt.executeUpdate(query);
                 if (rowsupdated>0) {
             JOptionPane.showMessageDialog(null, "Ordine eliminato!");
+}
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
+    public static void deleteCustomers(JTable table) {
+       
+        int[] selectedRows = table.getSelectedRows();
+        int columnCount = table.getColumnCount();
+        ArrayList<String> customerID = new ArrayList<>();
+        //matrice/collezione di tutti gli oggetti della riga selezionata
+        ArrayList<ArrayList<Object>> selectedCells = new ArrayList<>();
+        for (int i = 0; i < selectedRows.length; i++) {
+            ArrayList<Object> row = new ArrayList<>();
+            for (int j = 0; j < columnCount; j++) {
+                row.add(table.getValueAt(selectedRows[i], j));
+            }
+            selectedCells.add(row);
+        }
+        
+        for (ArrayList<Object> row : selectedCells) {
+            customerID.add(row.get(0).toString());
+        }
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
+            Statement stmt = con.createStatement();
+            int rowsupdated=0;
+
+            
+            for (String cId : customerID) {
+                String query = "DELETE FROM customers WHERE customerID = \"" + cId+"\"";
+                rowsupdated = stmt.executeUpdate(query);
+                if (rowsupdated>0) {
+            JOptionPane.showMessageDialog(null, "Cliente eliminato!");
 }
             }
         } catch (Exception e) {

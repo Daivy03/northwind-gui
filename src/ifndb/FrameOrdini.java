@@ -421,6 +421,15 @@ public class FrameOrdini extends javax.swing.JFrame {
 
     private void BTNEliminaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminaCActionPerformed
         // TODO add your handling code here:
+        String t = (String) FilterCustomersCombo.getSelectedItem();
+        try{
+            IFNDB.deleteCustomers(tableC);
+            IFNDB.recoverClientiCombo(IdCustomerCombo);
+            CompanyCheck.setSelected(false);
+            IFNDB.showCustomers((String)IdCustomerCombo.getSelectedItem(), t, tableC, CompanyCheck.isSelected());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"eliminazione fallita!","Errore",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BTNEliminaCActionPerformed
 
     private void CompanyCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompanyCheckActionPerformed
@@ -430,8 +439,11 @@ public class FrameOrdini extends javax.swing.JFrame {
     private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNEliminaActionPerformed
         // TODO add your handling code here:
         String t = (String) FilterCombo.getSelectedItem();
-        IFNDB.deleteOrders(table);
+        
         try{
+            IFNDB.deleteOrders(table);
+            IFNDB.recoverClientiCombo(IdClienteCombo);
+            ClienteCheck.setSelected(false);
             IFNDB.showOrders((String)IdClienteCombo.getSelectedItem(), t, table, ClienteCheck.isSelected());
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"eliminazione fallita!","Errore",JOptionPane.ERROR_MESSAGE);
