@@ -47,8 +47,8 @@ public class IFNDB {
                     "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "ORDER BY customers.CustomerID ASC";
         } else if (c) {
-            quer = "SELECT * FROM orders\n" +
-                    "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
+            quer = "SELECT orders.* FROM orders\n" +
+                    "INNER JOIN customers on orders.CustomerID = customers.CustomerID\n" +
                     "WHERE customers.CustomerID = ? "+
                     "ORDER BY orders."+ filterBy + " ASC";
         } else {

@@ -77,6 +77,8 @@ public class FrameOrdini extends javax.swing.JFrame {
         setTitle("Northwind manager");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jTabbedPane1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+
         IdClienteCombo.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         IdClienteCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         IdClienteCombo.addMouseListener(new java.awt.event.MouseAdapter() {
