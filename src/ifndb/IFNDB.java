@@ -363,7 +363,7 @@ public class IFNDB {
                 colonne.add(name);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "recupero ordini fallito!","Errore",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "recupero clienti fallito!","Errore",JOptionPane.ERROR_MESSAGE);
             System.exit(0);
             
         }
