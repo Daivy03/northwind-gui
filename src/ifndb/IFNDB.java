@@ -125,11 +125,9 @@ public class IFNDB {
         String quer;
         if (filterBy.equalsIgnoreCase("CustomerID") && !c) {
             quer = "SELECT * FROM customers\n" +
-//                    "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "ORDER BY customers.CustomerID ASC";
         } else if (c) {
             quer = "SELECT * FROM customers\n" +
-//                    "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
                     "WHERE customers.CustomerID = ? "+
                     "ORDER BY customers."+ filterBy + " ASC";
         } else {
@@ -188,10 +186,6 @@ public class IFNDB {
 
     }
     
-    
-    
-    
-    
     public static void deleteOrders(JTable table) {
        
         int[] selectedRows = table.getSelectedRows();
@@ -245,8 +239,6 @@ public class IFNDB {
         }
         return company;
     }
-
-    
     
     public static ArrayList<String> recoverOrders() throws Exception {
         ArrayList<String> ordini = new ArrayList<>();
@@ -349,7 +341,6 @@ public class IFNDB {
     }
 
     public static void main(String[] args) {
-
     }
 
 }

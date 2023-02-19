@@ -62,6 +62,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         ClienteCheck = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
         jLayeredClienti = new javax.swing.JLayeredPane();
         IdCustomerCombo = new javax.swing.JComboBox<>();
         FilterCustomersCombo = new javax.swing.JComboBox<>();
@@ -149,12 +150,14 @@ public class FrameOrdini extends javax.swing.JFrame {
         jScrollPane1.setViewportView(table);
 
         ClienteCheck.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        ClienteCheck.setText("Filtra Cliente:");
         ClienteCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ClienteCheckActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel1.setText("Filtra Cliente:");
 
         jLayeredOrdini.setLayer(IdClienteCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredOrdini.setLayer(FilterCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -164,6 +167,7 @@ public class FrameOrdini extends javax.swing.JFrame {
         jLayeredOrdini.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredOrdini.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredOrdini.setLayer(ClienteCheck, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredOrdini.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredOrdiniLayout = new javax.swing.GroupLayout(jLayeredOrdini);
         jLayeredOrdini.setLayout(jLayeredOrdiniLayout);
@@ -174,15 +178,18 @@ public class FrameOrdini extends javax.swing.JFrame {
                 .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(IdclienteLB1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
                         .addComponent(BTNElimina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTNVisualizza))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
@@ -200,10 +207,13 @@ public class FrameOrdini extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(IdclienteLB1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jLayeredOrdiniLayout.createSequentialGroup()
+                        .addComponent(FilterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addComponent(ClienteCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(IdClienteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredOrdiniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -529,6 +539,7 @@ public class FrameOrdini extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> IdCustomerCombo;
     private javax.swing.JLabel IdclienteLB1;
     private javax.swing.JLabel IdclienteLB2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredClienti;
     private javax.swing.JLayeredPane jLayeredOrdini;
     private javax.swing.JScrollPane jScrollPane1;
