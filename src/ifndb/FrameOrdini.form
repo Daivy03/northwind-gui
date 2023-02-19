@@ -274,17 +274,17 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FilterCombo2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ClienteCheck1" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Component id="FilterCustomersCombo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompanyCheck" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="IdCustomerCombo" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           <Component id="IdclienteLB2" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="BTNElimina2" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNEliminaC" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BTNVisualizza2" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNVisualizzaC" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" alignment="1" min="-2" pref="835" max="-2" attributes="0"/>
                       </Group>
@@ -307,9 +307,9 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="IdclienteLB2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="FilterCombo2" min="-2" max="-2" attributes="0"/>
+                              <Component id="FilterCustomersCombo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ClienteCheck1" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="CompanyCheck" min="-2" pref="32" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="IdCustomerCombo" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -320,8 +320,8 @@
                       </Group>
                       <EmptySpace pref="134" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BTNVisualizza2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTNElimina2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNVisualizzaC" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNEliminaC" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -358,7 +358,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="FilterCombo2">
+            <Component class="javax.swing.JComboBox" name="FilterCustomersCombo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
@@ -368,14 +368,14 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FilterCombo2MouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FilterCombo2ActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FilterCustomersComboMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FilterCustomersComboActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="BTNVisualizza2">
+            <Component class="javax.swing.JButton" name="BTNVisualizzaC">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -389,13 +389,13 @@
                 <Property name="text" type="java.lang.String" value="Visualizza"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNVisualizza2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNVisualizzaCActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="BTNElimina2">
+            <Component class="javax.swing.JButton" name="BTNEliminaC">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -409,7 +409,7 @@
                 <Property name="text" type="java.lang.String" value="Elimina"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNElimina2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNEliminaCActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="IdclienteLB2">
@@ -438,7 +438,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="table2">
+                <Component class="javax.swing.JTable" name="tableC">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
@@ -460,7 +460,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JCheckBox" name="ClienteCheck1">
+            <Component class="javax.swing.JCheckBox" name="CompanyCheck">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="14" style="0"/>
@@ -468,7 +468,7 @@
                 <Property name="text" type="java.lang.String" value="Filtra Cliente:"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClienteCheck1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CompanyCheckActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

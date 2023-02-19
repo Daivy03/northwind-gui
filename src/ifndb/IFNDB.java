@@ -106,6 +106,92 @@ public class IFNDB {
     }
 
     }
+    public static void showCustomers(String clientId, String filterBy, JTable table, Boolean c){
+        ResultSet rs = null;
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
+
+        String companyName = clientId;
+        String query = "SELECT CustomerID FROM customers WHERE CompanyName = ?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, companyName);
+        ResultSet resultSet = statement.executeQuery();
+        String customerID = null;
+        if (resultSet.next()) {
+            customerID = resultSet.getString("CustomerID");
+        }
+
+        String quer;
+        if (filterBy.equalsIgnoreCase("CustomerID") && !c) {
+            quer = "SELECT * FROM customers\n" +
+//                    "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
+                    "ORDER BY customers.CustomerID ASC";
+        } else if (c) {
+            quer = "SELECT * FROM customers\n" +
+//                    "INNER JOIN customers on customers.CustomerID = orders.CustomerID\n" +
+                    "WHERE customers.CustomerID = ? "+
+                    "ORDER BY customers."+ filterBy + " ASC";
+        } else {
+            quer = "SELECT * FROM customers\n" +
+                    "ORDER BY customers." + filterBy + " ASC";
+        }
+
+        PreparedStatement stmt = con.prepareStatement(quer);
+        if (c) {
+            stmt.setString(1, customerID);
+        }
+        rs = stmt.executeQuery();
+
+        DefaultTableModel tableModel = new DefaultTableModel(){
+            //impedire la modifica (solo visibile) delle righe
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        int columnCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            tableModel.addColumn(rs.getMetaData().getColumnName(i));
+        }
+
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = rs.getObject(i);
+            }
+            tableModel.addRow(row);
+        }
+
+        table.setModel(tableModel);
+
+        for (int i = 1; i < table.getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth(200);
+        }
+
+        table.setEnabled(true);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        JScrollPane scrollPane = (JScrollPane) table.getParent().getParent();
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // Aggiorna il contenitore principale della tabella per far sì che venga ridisegnata
+        table.getParent().validate();
+
+        // Chiude la connessione al database
+        con.close();
+    } catch(Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
+
+    }
+    
+    
+    
+    
+    
     public static void deleteOrders(JTable table) {
        
         int[] selectedRows = table.getSelectedRows();
@@ -223,7 +309,39 @@ public class IFNDB {
         String[] cols = colonne.toArray(new String[colonne.size()]);
         DefaultComboBoxModel model = (DefaultComboBoxModel) combo.getModel();
         model.removeAllElements();
-        // JComboBox list = new JComboBox(cols);
+        for (String item : cols) {
+            model.addElement(item);
+        }
+
+    }
+    public static void recoverFilterCustomers(JComboBox combo) {
+        String query = "SELECT COLUMN_NAME AS Field \n" +
+                "FROM information_schema.columns \n" +
+                "WHERE table_name = 'customers' \n" +
+                "AND COLUMN_NAME NOT IN \n" +
+                "  (SELECT COLUMN_NAME \n" +
+                "   FROM customers \n" +
+                "   WHERE COLUMN_NAME IS NULL);";
+        ArrayList<String> colonne = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind", user, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("Field");
+                colonne.add(name);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "recupero ordini fallito!","Errore",JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+            
+        }
+        // imposto combobox con le colonne recuperate
+
+        String[] cols = colonne.toArray(new String[colonne.size()]);
+        DefaultComboBoxModel model = (DefaultComboBoxModel) combo.getModel();
+        model.removeAllElements();
         for (String item : cols) {
             model.addElement(item);
         }

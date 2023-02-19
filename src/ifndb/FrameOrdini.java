@@ -27,8 +27,13 @@ public class FrameOrdini extends javax.swing.JFrame {
     public FrameOrdini() {
         initComponents();
         try {
+            //Orders:
             IFNDB.recoverFilterOrders(FilterCombo);
             IFNDB.recoverClientiCombo(IdClienteCombo);
+            //Customers:
+            IFNDB.recoverFilterCustomers(FilterCustomersCombo);
+            IFNDB.recoverClientiCombo(IdCustomerCombo);
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -59,14 +64,14 @@ public class FrameOrdini extends javax.swing.JFrame {
         ClienteCheck = new javax.swing.JCheckBox();
         jLayeredClienti = new javax.swing.JLayeredPane();
         IdCustomerCombo = new javax.swing.JComboBox<>();
-        FilterCombo2 = new javax.swing.JComboBox<>();
-        BTNVisualizza2 = new javax.swing.JButton();
-        BTNElimina2 = new javax.swing.JButton();
+        FilterCustomersCombo = new javax.swing.JComboBox<>();
+        BTNVisualizzaC = new javax.swing.JButton();
+        BTNEliminaC = new javax.swing.JButton();
         IdclienteLB2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table2 = new javax.swing.JTable();
-        ClienteCheck1 = new javax.swing.JCheckBox();
+        tableC = new javax.swing.JTable();
+        CompanyCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Northwind manager");
@@ -225,35 +230,35 @@ public class FrameOrdini extends javax.swing.JFrame {
             }
         });
 
-        FilterCombo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Discendente" }));
-        FilterCombo2.addMouseListener(new java.awt.event.MouseAdapter() {
+        FilterCustomersCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Discendente" }));
+        FilterCustomersCombo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FilterCombo2MouseClicked(evt);
+                FilterCustomersComboMouseClicked(evt);
             }
         });
-        FilterCombo2.addActionListener(new java.awt.event.ActionListener() {
+        FilterCustomersCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FilterCombo2ActionPerformed(evt);
-            }
-        });
-
-        BTNVisualizza2.setBackground(new java.awt.Color(0, 153, 255));
-        BTNVisualizza2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        BTNVisualizza2.setForeground(new java.awt.Color(255, 255, 255));
-        BTNVisualizza2.setText("Visualizza");
-        BTNVisualizza2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNVisualizza2ActionPerformed(evt);
+                FilterCustomersComboActionPerformed(evt);
             }
         });
 
-        BTNElimina2.setBackground(new java.awt.Color(204, 0, 0));
-        BTNElimina2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        BTNElimina2.setForeground(new java.awt.Color(255, 255, 255));
-        BTNElimina2.setText("Elimina");
-        BTNElimina2.addActionListener(new java.awt.event.ActionListener() {
+        BTNVisualizzaC.setBackground(new java.awt.Color(0, 153, 255));
+        BTNVisualizzaC.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        BTNVisualizzaC.setForeground(new java.awt.Color(255, 255, 255));
+        BTNVisualizzaC.setText("Visualizza");
+        BTNVisualizzaC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNElimina2ActionPerformed(evt);
+                BTNVisualizzaCActionPerformed(evt);
+            }
+        });
+
+        BTNEliminaC.setBackground(new java.awt.Color(204, 0, 0));
+        BTNEliminaC.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        BTNEliminaC.setForeground(new java.awt.Color(255, 255, 255));
+        BTNEliminaC.setText("Elimina");
+        BTNEliminaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNEliminaCActionPerformed(evt);
             }
         });
 
@@ -264,8 +269,8 @@ public class FrameOrdini extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        table2.setAutoCreateRowSorter(true);
-        table2.setModel(new javax.swing.table.DefaultTableModel(
+        tableC.setAutoCreateRowSorter(true);
+        tableC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -276,27 +281,27 @@ public class FrameOrdini extends javax.swing.JFrame {
                 "CustomerID", "CompanyName", "ContactName", "ContactTitle"
             }
         ));
-        table2.setEditingRow(-1);
-        table2.setMaximumSize(new java.awt.Dimension(2147483647, 90));
-        table2.setShowGrid(true);
-        jScrollPane2.setViewportView(table2);
+        tableC.setEditingRow(-1);
+        tableC.setMaximumSize(new java.awt.Dimension(2147483647, 90));
+        tableC.setShowGrid(true);
+        jScrollPane2.setViewportView(tableC);
 
-        ClienteCheck1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        ClienteCheck1.setText("Filtra Cliente:");
-        ClienteCheck1.addActionListener(new java.awt.event.ActionListener() {
+        CompanyCheck.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        CompanyCheck.setText("Filtra Cliente:");
+        CompanyCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClienteCheck1ActionPerformed(evt);
+                CompanyCheckActionPerformed(evt);
             }
         });
 
         jLayeredClienti.setLayer(IdCustomerCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredClienti.setLayer(FilterCombo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredClienti.setLayer(BTNVisualizza2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredClienti.setLayer(BTNElimina2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(FilterCustomersCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(BTNVisualizzaC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(BTNEliminaC, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredClienti.setLayer(IdclienteLB2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredClienti.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredClienti.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredClienti.setLayer(ClienteCheck1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredClienti.setLayer(CompanyCheck, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredClientiLayout = new javax.swing.GroupLayout(jLayeredClienti);
         jLayeredClienti.setLayout(jLayeredClientiLayout);
@@ -305,16 +310,16 @@ public class FrameOrdini extends javax.swing.JFrame {
             .addGroup(jLayeredClientiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FilterCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClienteCheck1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FilterCustomersCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CompanyCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IdCustomerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IdclienteLB2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredClientiLayout.createSequentialGroup()
-                        .addComponent(BTNElimina2)
+                        .addComponent(BTNEliminaC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNVisualizza2))
+                        .addComponent(BTNVisualizzaC))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,9 +336,9 @@ public class FrameOrdini extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(IdclienteLB2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FilterCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FilterCustomersCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ClienteCheck1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CompanyCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(IdCustomerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredClientiLayout.createSequentialGroup()
@@ -341,8 +346,8 @@ public class FrameOrdini extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNVisualizza2)
-                    .addComponent(BTNElimina2))
+                    .addComponent(BTNVisualizzaC)
+                    .addComponent(BTNEliminaC))
                 .addContainerGap())
             .addGroup(jLayeredClientiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredClientiLayout.createSequentialGroup()
@@ -384,25 +389,31 @@ public class FrameOrdini extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IdCustomerComboActionPerformed
 
-    private void FilterCombo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterCombo2MouseClicked
+    private void FilterCustomersComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterCustomersComboMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_FilterCombo2MouseClicked
+    }//GEN-LAST:event_FilterCustomersComboMouseClicked
 
-    private void FilterCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterCombo2ActionPerformed
+    private void FilterCustomersComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterCustomersComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FilterCombo2ActionPerformed
+    }//GEN-LAST:event_FilterCustomersComboActionPerformed
 
-    private void BTNVisualizza2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNVisualizza2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNVisualizza2ActionPerformed
+    private void BTNVisualizzaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNVisualizzaCActionPerformed
+        // TODO aaggiungere metodo per recuperare db customers
+        try {
+            String t = (String) FilterCustomersCombo.getSelectedItem();
+            IFNDB.showCustomers((String) IdCustomerCombo.getSelectedItem(), t, tableC, CompanyCheck.isSelected());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,(String)e.getMessage(),"",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_BTNVisualizzaCActionPerformed
 
-    private void BTNElimina2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNElimina2ActionPerformed
+    private void BTNEliminaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminaCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BTNElimina2ActionPerformed
+    }//GEN-LAST:event_BTNEliminaCActionPerformed
 
-    private void ClienteCheck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteCheck1ActionPerformed
+    private void CompanyCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompanyCheckActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ClienteCheck1ActionPerformed
+    }//GEN-LAST:event_CompanyCheckActionPerformed
 
     private void BTNEliminaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BTNEliminaActionPerformed
         // TODO add your handling code here:
@@ -505,13 +516,13 @@ public class FrameOrdini extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNElimina;
-    private javax.swing.JButton BTNElimina2;
+    private javax.swing.JButton BTNEliminaC;
     public javax.swing.JButton BTNVisualizza;
-    public javax.swing.JButton BTNVisualizza2;
+    public javax.swing.JButton BTNVisualizzaC;
     private javax.swing.JCheckBox ClienteCheck;
-    private javax.swing.JCheckBox ClienteCheck1;
+    private javax.swing.JCheckBox CompanyCheck;
     private javax.swing.JComboBox<String> FilterCombo;
-    private javax.swing.JComboBox<String> FilterCombo2;
+    private javax.swing.JComboBox<String> FilterCustomersCombo;
     private javax.swing.JComboBox<String> IdClienteCombo;
     private javax.swing.JComboBox<String> IdCustomerCombo;
     private javax.swing.JLabel IdclienteLB1;
@@ -524,6 +535,6 @@ public class FrameOrdini extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable table;
-    private javax.swing.JTable table2;
+    private javax.swing.JTable tableC;
     // End of variables declaration//GEN-END:variables
 }
